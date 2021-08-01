@@ -1,0 +1,47 @@
+This is the code I have used for measuring temperature using the Arduino. It takes the reading from the Arduino and outputs the reading as a corresponding temperature value!
+
+import pyfirmata as pf
+import numpy as np
+import time
+from jupyterplot import ProgressPlot
+
+board = pf.Arduino("COM3")
+it = pf.util.Iterator(board)
+it.start()
+
+analog_0 = board.get_pin('a:0:i')
+analog_1 = board.get_pin('a:1:i')
+
+Vk = []
+Vb = []
+pp = ProgressPlot(x_lim = [0,500], y_lim = [0,2])
+
+for i in range(500):
+    time.sleep(3)
+    Vk.append(analog_0.read()*5.0)
+    Vb.append(analog_1.read()*5.0)
+    pp.update(analog_0.read()*5.0)
+    
+Vk = np.array(Vk)
+Vb = np.array(Vb)
+print(Vk)
+print(Vb)
+
+Rk = 1000
+I = (Vk)/Rk
+print(I)
+
+Ru = (Vb-Vk)/I
+print(Ru)
+
+T0 = 0
+alpha = 0.00392
+T = ((Ru/1000) - 1)/alpha + T0
+print(T)
+timexxx= range(500)
+
+import matplotlib.pyplot as plt
+plt.plot(range(0,len(T)), T, 'b-o')
+plt.ylim([-30,10])
+plt.xlabel('Time (3s)')
+plt.ylabel('Temperature (C)')
