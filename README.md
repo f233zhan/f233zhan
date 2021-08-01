@@ -1,4 +1,6 @@
-### Hi there 👋
+### Hi there 👋My name is Fan Zhang.
+
+I am a Undergraduate student in Chemical Engineering. My goal for the future is to improve the world's material sustainablility and make more out of less!
 
 <!--
 **f233zhan/f233zhan** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
